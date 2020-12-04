@@ -13,7 +13,7 @@ public class Main {
 		frame.setVisible(true);
 		frame.setTitle("Caliper Program");
 		
-    //Creates an ImageIcon object called "caliper"
+    		//Creates an ImageIcon object called "caliper"
 		ImageIcon caliper = new ImageIcon("caliper.jpg");
 		Image logo = caliper.getImage();
 		frame.setIconImage(logo);
