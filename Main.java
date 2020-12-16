@@ -1,11 +1,12 @@
-import java.awt.Component;
-import java.awt.Dimension;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
 public class Main {
+	
+	Button btn1;
+	Button btn2;
+	static double value = 0;
 	
 	/**
 	 * Creates a GUI inside a JFrame window
@@ -22,6 +23,21 @@ public class Main {
 		JPanel panel = new JPanel();
 		JButton btn1 = new JButton("Increase");
 		JButton btn2 = new JButton("Decrease");
+		
+		//KeyListeners for Counter
+		btn1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				value = value + 0.1;
+				System.out.println(value + "cm");
+			}
+		});
+		
+		btn2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				value = value + 0.1;
+				System.out.println(value + "cm");
+			}
+		});
 		
 		//Adds 2 buttons to the JPanel
 		panel.add(btn1);
