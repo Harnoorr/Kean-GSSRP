@@ -58,8 +58,6 @@ public class Main{
 		
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				value = value + -0.1;
 				double roundOff = Math.round(value*100)/100D;
 				System.out.println(roundOff + "cm");
