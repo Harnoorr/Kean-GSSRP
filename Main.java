@@ -51,16 +51,21 @@ public class Main{
 		btn1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				value = value + 0.1;
-				System.out.println(value + "cm");
+				double roundOff = Math.round(value*100)/100D;
+				System.out.println(roundOff + "cm");
 			}
 		});
 		
 		btn2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				value = value + 0.1;
-				System.out.println(value + "cm");
+				
+				
+				value = value + -0.1;
+				double roundOff = Math.round(value*100)/100D;
+				System.out.println(roundOff + "cm");
 			}
 		});
+		
 		
 		//Adds 2 buttons to the JPanel
 		panel.add(btn1);
