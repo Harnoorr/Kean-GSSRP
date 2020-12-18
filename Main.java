@@ -1,21 +1,44 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-
-public class Main {
+public class Main extends Canvas {
 	
 	Button btn1;
 	Button btn2;
 	static double value = 0;
 	
 	/**
+	 * 
+	 * Creates a JComponent that includes Graphics to be 
+	 * used as an argument for JPanel
+	 *
+	 */
+	public class MyGraphics extends JComponent {
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		MyGraphics(){
+			setPreferredSize(new Dimension(800, 600));
+		}
+		
+		@Override
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.fillRect(80,  80,  100,  100);
+		}
+	}
+	
+	/**
 	 * Creates a GUI inside a JFrame window
 	 * this method is initialized in the main method
 	*/
-	public static void createGUI() {
+	public void createGUI() {
 		
 		//Initialize JFrame
-		JFrame frame = new JFrame();
+		final JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 		
@@ -43,11 +66,13 @@ public class Main {
 		panel.add(btn1);
 		panel.add(btn2);
 		
+		/*
 		//JPanel Settings
 		panel.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel.setPreferredSize(new Dimension(100, 500));
 		panel.setMaximumSize(new Dimension(100, 500));
 		panel.setBorder(BorderFactory.createTitledBorder("Caliper"));
+		*/
 		
 		//Adds JPanel to JFrame
 		frame.getContentPane().add(panel);
@@ -55,11 +80,22 @@ public class Main {
 		frame.setVisible(true);
 		frame.setTitle("Caliper Program");
 		
+		//Adds Graphics to JPanel
+		panel.add(new MyGraphics());
 	}
+	
 	
 	public static void main(String[] args) {
 		
-		createGUI();
+		//Overrides static instance to run createGUI() in main 
+		EventQueue.invokeLater(new Runnable() {
+			
+			@Override
+			public void run() {
+				Main GUI = new Main();
+				GUI.createGUI();
+			}
+		});
 		
 	}
 }
