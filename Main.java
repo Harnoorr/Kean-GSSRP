@@ -15,9 +15,7 @@ public class Main{
 	 */
 	public class MyGraphics extends JComponent {
 		
-		/**
-		 * 
-		 */
+
 		private static final long serialVersionUID = 1L;
 
 		MyGraphics(){
@@ -26,24 +24,29 @@ public class Main{
 		
 		@Override
 		public void paintComponent(Graphics g) {
-			super.paintComponent(g);
 			g.fillRect(80,  80,  100,  100);
 		}
 	}
 	
+	
+	
 	/**
+	 * 
 	 * Creates a GUI inside a JFrame window
 	 * this method is initialized in the main method
+	 * 
 	*/
 	public void createGUI() {
 		
 		//Initialize JFrame
 		final JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
+		frame.getContentPane().setLayout(new GridLayout(0, 2));
 		
 		//Initialize JPanel
 		JPanel panel = new JPanel();
+		JPanel objectPanel = new JPanel();
+		JPanel caliperPanel = new JPanel();
 		JButton btn1 = new JButton("Increase");
 		JButton btn2 = new JButton("Decrease");
 		
@@ -77,14 +80,22 @@ public class Main{
 		panel.setBorder(BorderFactory.createTitledBorder("Caliper"));
 		*/
 		
-		//Adds JPanel to JFrame
+		//Adds JPanels to JFrame
 		frame.getContentPane().add(panel);
-		frame.setSize(800, 600);
+		frame.add(caliperPanel);
+		frame.getContentPane().add(objectPanel);
+		frame.setSize(1920, 1080);
 		frame.setVisible(true);
 		frame.setTitle("Caliper Program");
 		
-		//Adds Graphics to JPanel
-		panel.add(new MyGraphics());
+		//Adds Graphics to objectPanel
+		objectPanel.add(new MyGraphics());
+		
+		//Adds Caliper Image to caliperPanel
+		JLabel imageLabel = new JLabel();
+		imageLabel.setIcon(new ImageIcon("Insert File Path to Caliper Body"));
+		caliperPanel.add(imageLabel);
+		
 	}
 	
 	
