@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class Main {
 	
 	static double value = 0;
+	double measure = 119;
 	
 	public void addComponentsToPane(Container pane) {
 	    pane.setLayout(null);
@@ -50,7 +51,6 @@ public class Main {
 			}
 		});
 		
-		
 		//Experimental JPanel for Cube, feel free to improve
 		JPanel objectPanel = new JPanel();
 	    pane.add(objectPanel);
@@ -77,11 +77,19 @@ public class Main {
 	    frame.setVisible(true);
 	    
 	    //Caliper Image 
+	    
+	    JLabel label0 = new JLabel();
+	    Image img0 = new ImageIcon(this.getClass().getResource("/Caliper Bottom.png")).getImage();
+	    label0.setIcon(new ImageIcon(img0));
+	    label0.setBounds((int) (measure + value), 115, 840, 293);
+	    frame.getContentPane().add(label0);
+	    
 	    JLabel label = new JLabel();
 	    Image img = new ImageIcon(this.getClass().getResource("/Caliper Body.png")).getImage();
 	    label.setIcon(new ImageIcon(img));
 	    label.setBounds(0, 53, 840, 293);
 	    frame.getContentPane().add(label);
+	    
   }
 
 	public static void main(String[] args) {
