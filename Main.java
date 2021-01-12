@@ -1,97 +1,105 @@
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Image;
-import java.awt.Insets;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
 public class Main {
 	
+	static Boolean updated = false;
+	static Boolean running = false;
 	static double value = 0;
-	double measure = 119;
+	static double measure = 119;
+	JButton b1 = new JButton("Increase");
+	JButton b2 = new JButton("Decrease");
+	JFrame frame = new JFrame("Caliper Program 3.0");
+	JPanel objectPanel = new JPanel();
+	JLabel label0 = new JLabel();
+	JLabel label = new JLabel();
 	
+	//Increases the value of the caliper measure
+	public void Increase() {
+		value = value + 0.1;
+		double roundOff = Math.round(value*100)/100D;
+		System.out.println(roundOff + "cm");
+	}
+	
+	//Decreases the value of the caliper measure
+	public void Decrease() {
+		value = value - 0.1;
+		double roundOff = Math.round(value*100)/100D;
+		System.out.println(roundOff + "cm");
+	}
+	
+	//Adds buttons and panels to a pane that will be added to a frame
 	public void addComponentsToPane(Container pane) {
-	    pane.setLayout(null);
-	    pane.setBackground(Color.LIGHT_GRAY);
-	    
-	    //Buttons 
-	    JButton b1 = new JButton("Increase");
-	    JButton b2 = new JButton("Decrease");
-	
-	    pane.add(b1);
-	    pane.add(b2);
-	    Insets insets = pane.getInsets();
-	    Dimension size = b1.getPreferredSize();
-	    b1.setBounds(25 + insets.left, 5 + insets.top, size.width, size.height);
-	    size = b2.getPreferredSize();
-	    b2.setBounds(25 + insets.left, 40 + insets.top, size.width, size.height);
-	    
-	    //Action Listeners for Buttons
-	    b1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				value = value + 0.1;
-				double roundOff = Math.round(value*100)/100D;
-				System.out.println(roundOff + "cm");
-			}
-		});
+		pane.setLayout(null);
 		
-		b2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				value = value + -0.1;
-				double roundOff = Math.round(value*100)/100D;
-				System.out.println(roundOff + "cm");
-			}
-		});
+		pane.add(b1);
+		pane.add(b2);
+		pane.add(objectPanel);
 		
-		//Experimental JPanel for Cube, feel free to improve
-		JPanel objectPanel = new JPanel();
-	    pane.add(objectPanel);
+		//Button Dimensions
+		Insets insets = pane.getInsets();
+		Dimension size = b1.getPreferredSize();
+		b1.setBounds(25 + insets.left, 5+ insets.top, size.width, size.height);
+		size = b2.getPreferredSize();
+		b2.setBounds(25 + insets.left, 40 + insets.top, size.width, size.height);
+		
+		//EXPERIMENTAL CODE FOR SQUARE, FEEL FREE TO IMPROVE
 	    objectPanel.setBounds(100 + insets.left, 500 + insets.top, 100, 100);
-	    objectPanel.setBackground(Color.YELLOW);
-  }
-
-	/*
-	 *Creates the GUI to be invoked from the main thread 
-	 */
-	private void createAndShowGUI() {
-	    
-	    //Create and set up the window.
-	    JFrame frame = new JFrame("Caliper Program 2.01");
-	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    objectPanel.setBackground(Color.YELLOW);		
+	}
 	
-	    //Set up the content pane.
-	    addComponentsToPane(frame.getContentPane());
-	
-	    //Size and display the window.
-	    Insets insets = frame.getInsets();
-	    frame.setSize(900 + insets.left + insets.right, 900 + insets.top
-	        + insets.bottom);
-	    frame.setVisible(true);
-	    
-	    //Caliper Image 
-	    
-	    JLabel label0 = new JLabel();
+	//Updates the current values of the images and adds them to the pane
+	public void Update() {
+		addComponentsToPane(frame.getContentPane());
+		
 	    Image img0 = new ImageIcon(this.getClass().getResource("/Caliper Bottom.png")).getImage();
 	    label0.setIcon(new ImageIcon(img0));
 	    label0.setBounds((int) (measure + value), 115, 840, 293);
 	    frame.getContentPane().add(label0);
 	    
-	    JLabel label = new JLabel();
 	    Image img = new ImageIcon(this.getClass().getResource("/Caliper Body.png")).getImage();
 	    label.setIcon(new ImageIcon(img));
 	    label.setBounds(0, 53, 840, 293);
 	    frame.getContentPane().add(label);
 	    
-  }
+		updated = true;
+	}
+	
+	//JFrame dimensions
+	public void createGUI() {
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+	    Insets insets = frame.getInsets();
+	    frame.setSize(900 + insets.left + insets.right, 900 + insets.top
+	        + insets.bottom);
+	    frame.setVisible(true);
+	}
+	
+	//Separate method to compile previous methods and add listeners to the button
+	public void runProgram() {
+		running = true;
+		createGUI();
+		Update();
+		
+	    b1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Increase();
+				Update();
+			}
+		});
+		
+		b2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Decrease();
+				Update();
+			}
+		});
 
+	}
+	
+	//Executes runProgram() method in a separate thread
 	public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -99,8 +107,11 @@ public class Main {
 			@Override
 			public void run() {
 				Main GUI = new Main();
-				GUI.createAndShowGUI();
+				GUI.runProgram();
+				
 			}
 		});
-  }
+		
+	}
+
 }
