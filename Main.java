@@ -9,8 +9,10 @@ public class Main {
 	static Boolean running = false;
 	static double value = 0;
 	static double measure = 119;
-	JButton b1 = new JButton("Increase");
-	JButton b2 = new JButton("Decrease");
+	Icon btnImg1 = new ImageIcon(this.getClass().getResource("/Increase button.png"));
+	JButton b1 = new JButton(btnImg1);
+	Icon btnImg2 = new ImageIcon(this.getClass().getResource("/Decrease Button.png"));
+	JButton b2 = new JButton(btnImg2);
 	JFrame frame = new JFrame("Caliper Program 3.0");
 	JPanel objectPanel = new JPanel();
 	JLabel label0 = new JLabel();
@@ -42,8 +44,12 @@ public class Main {
 		Insets insets = pane.getInsets();
 		Dimension size = b1.getPreferredSize();
 		b1.setBounds(25 + insets.left, 5+ insets.top, size.width, size.height);
+		b1.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		b1.setContentAreaFilled(false);
 		size = b2.getPreferredSize();
 		b2.setBounds(25 + insets.left, 40 + insets.top, size.width, size.height);
+		b2.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		b2.setContentAreaFilled(false);
 		
 		//EXPERIMENTAL CODE FOR SQUARE, FEEL FREE TO IMPROVE
 	    objectPanel.setBounds(100 + insets.left, 500 + insets.top, 100, 100);
