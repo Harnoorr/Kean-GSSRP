@@ -16,7 +16,9 @@ public class Main {
 	JFrame frame = new JFrame("Caliper Program 3.0");
 	JPanel objectPanel = new JPanel();
 	JLabel label0 = new JLabel();
-	JLabel label = new JLabel();
+	JLabel label1 = new JLabel();
+	JLabel label2 = new JLabel();
+	JLabel label3 = new JLabel();
 	
 	//Increases the value of the caliper measure
 	public void Increase() {
@@ -43,17 +45,20 @@ public class Main {
 		//Button Dimensions
 		Insets insets = pane.getInsets();
 		Dimension size = b1.getPreferredSize();
-		b1.setBounds(25 + insets.left, 5+ insets.top, size.width, size.height);
+		b1.setBounds(300 + insets.left, 100 + insets.top, size.width, size.height);
 		b1.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		b1.setContentAreaFilled(false);
 		size = b2.getPreferredSize();
-		b2.setBounds(25 + insets.left, 40 + insets.top, size.width, size.height);
+		b2.setBounds(500 + insets.left, 100 + insets.top, size.width, size.height);
 		b2.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		b2.setContentAreaFilled(false);
+
+		b1.setToolTipText("Click this button to increase the width.");
+		b2.setToolTipText("Click this button to decrease the width.");
 		
 		//EXPERIMENTAL CODE FOR SQUARE, FEEL FREE TO IMPROVE
-	    objectPanel.setBounds(100 + insets.left, 500 + insets.top, 100, 100);
-	    objectPanel.setBackground(Color.YELLOW);		
+	    //objectPanel.setBounds(80 + insets.left, 350 + insets.top, 100, 100);
+	    //objectPanel.setBackground(Color.YELLOW);		
 	}
 	
 	//Updates the current values of the images and adds them to the pane
@@ -64,11 +69,24 @@ public class Main {
 	    label0.setIcon(new ImageIcon(img0));
 	    label0.setBounds((int) (measure + value), 115, 840, 293);
 	    frame.getContentPane().add(label0);
-	    
+
 	    Image img = new ImageIcon(this.getClass().getResource("/Caliper Body.png")).getImage();
-	    label.setIcon(new ImageIcon(img));
-	    label.setBounds(0, 53, 840, 293);
-	    frame.getContentPane().add(label);
+	    label1.setIcon(new ImageIcon(img));
+	    label1.setBounds(25, 53, 840, 293);
+	    frame.getContentPane().add(label1);
+
+		/*
+		Image img3 = new ImageIcon(this.getClass().getResource("/cube.png")).getImage();
+ 		label3.setIcon(new ImageIcon(img3));
+	    label3.setBounds(500, 300, 100, 100);
+	    frame.getContentPane().add(label3);
+		*/
+
+		Image img2 = new ImageIcon(this.getClass().getResource("/background.png")).getImage();
+ 		label2.setIcon(new ImageIcon(img2));
+	    label2.setBounds(0, 0, 900, 900); 
+	    frame.getContentPane().add(label2);
+	
 	    
 		updated = true;
 	}
