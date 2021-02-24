@@ -13,23 +13,27 @@ public class Main {
 	JButton b1 = new JButton(btnImg1);
 	Icon btnImg2 = new ImageIcon(this.getClass().getResource("/Decrease Button.png"));
 	JButton b2 = new JButton(btnImg2);
+	Icon btnImg3 = new ImageIcon(this.getClass().getResource("/Change Shape.png"));
+	JButton b3 = new JButton(btnImg3);
+	Icon btnImg4 = new ImageIcon(this.getClass().getResource("/Change Caliper.png"));
+	JButton b4 = new JButton(btnImg4);
 	JFrame frame = new JFrame("Caliper Program 3.0");
 	JPanel objectPanel = new JPanel();
 	JLabel label0 = new JLabel();
 	JLabel label1 = new JLabel();
-	JLabel label2 = new JLabel();
-	JLabel label3 = new JLabel();
+	int square = 0;
+	Boolean vertical = true;
 	
 	//Increases the value of the caliper measure
 	public void Increase() {
-		value = value + 0.1;
+		value = value + 1;
 		double roundOff = Math.round(value*100)/100D;
 		System.out.println(roundOff + "cm");
 	}
 	
 	//Decreases the value of the caliper measure
 	public void Decrease() {
-		value = value - 0.1;
+		value = value - 1;
 		double roundOff = Math.round(value*100)/100D;
 		System.out.println(roundOff + "cm");
 	}
@@ -40,40 +44,72 @@ public class Main {
 		
 		pane.add(b1);
 		pane.add(b2);
+		pane.add(b3);
+		pane.add(b4);
 		pane.add(objectPanel);
 		
 		//Button Dimensions
 		Insets insets = pane.getInsets();
 		Dimension size = b1.getPreferredSize();
-		b1.setBounds(300 + insets.left, 100 + insets.top, size.width, size.height);
+		b1.setBounds(150 + insets.left, 100 + insets.top, size.width, size.height);
 		b1.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		b1.setContentAreaFilled(false);
 		size = b2.getPreferredSize();
-		b2.setBounds(500 + insets.left, 100 + insets.top, size.width, size.height);
+		b2.setBounds(300 + insets.left, 100 + insets.top, size.width, size.height);
 		b2.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		b2.setContentAreaFilled(false);
 
 		b1.setToolTipText("Click this button to increase the width.");
 		b2.setToolTipText("Click this button to decrease the width.");
 		
+		size = b3.getPreferredSize();
+		b3.setBounds(450 + insets.left, 100 + insets.top, size.width, size.height);
+		b3.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		b3.setContentAreaFilled(false);
+		
+		size = b4.getPreferredSize();
+		b4.setBounds(600 +insets.left, 100 + insets.top, size.width, size.height);
+		b4.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+		b4.setContentAreaFilled(false);
+		
 		//EXPERIMENTAL CODE FOR SQUARE, FEEL FREE TO IMPROVE
-	    //objectPanel.setBounds(80 + insets.left, 350 + insets.top, 100, 100);
-	    //objectPanel.setBackground(Color.YELLOW);		
+		if (square == 0) {
+			objectPanel.setBounds(80 + insets.left, 350 + insets.top, 100, 100);
+		    objectPanel.setBackground(Color.YELLOW);	
+		}
+		else {
+			objectPanel.setBounds(80 + insets.left, 350 + insets.top, 100, 200);
+		    objectPanel.setBackground(Color.YELLOW);
+		}
 	}
 	
 	//Updates the current values of the images and adds them to the pane
 	public void Update() {
 		addComponentsToPane(frame.getContentPane());
 		
-	    Image img0 = new ImageIcon(this.getClass().getResource("/Caliper Bottom.png")).getImage();
-	    label0.setIcon(new ImageIcon(img0));
-	    label0.setBounds((int) (measure + value), 115, 840, 293);
-	    frame.getContentPane().add(label0);
+		if (vertical) {
+			Image img0 = new ImageIcon(this.getClass().getResource("/Caliper Bottom.png")).getImage();
+			label0.setIcon(new ImageIcon(img0));
+			label0.setBounds((int) (measure + value), 115, 840, 293);
+			frame.getContentPane().add(label0);
 
-	    Image img = new ImageIcon(this.getClass().getResource("/Caliper Body.png")).getImage();
-	    label1.setIcon(new ImageIcon(img));
-	    label1.setBounds(25, 53, 840, 293);
-	    frame.getContentPane().add(label1);
+			Image img = new ImageIcon(this.getClass().getResource("/Caliper Body.png")).getImage();
+			label1.setIcon(new ImageIcon(img));
+			label1.setBounds(25, 53, 840, 293);
+			frame.getContentPane().add(label1);
+		}
+		
+		else {
+			Image img0 = new ImageIcon(this.getClass().getResource("/Caliper Bottom hori.png")).getImage();
+			label0.setIcon(new ImageIcon(img0));
+			label0.setBounds(500, (int) (measure + value) + 150, 171, 205);
+			frame.getContentPane().add(label0);
+
+			Image img = new ImageIcon(this.getClass().getResource("/Caliper Body hori.png")).getImage();
+			label1.setIcon(new ImageIcon(img));
+			label1.setBounds(500, 150, 293, 840);
+			frame.getContentPane().add(label1);
+		}
 
 		/*
 		Image img3 = new ImageIcon(this.getClass().getResource("/cube.png")).getImage();
@@ -82,10 +118,12 @@ public class Main {
 	    frame.getContentPane().add(label3);
 		*/
 
-		Image img2 = new ImageIcon(this.getClass().getResource("/background.png")).getImage();
+		/*
+	    Image img2 = new ImageIcon(this.getClass().getResource("/background.png")).getImage();
  		label2.setIcon(new ImageIcon(img2));
 	    label2.setBounds(0, 0, 900, 900); 
 	    frame.getContentPane().add(label2);
+	    */
 	
 	    
 		updated = true;
@@ -117,6 +155,34 @@ public class Main {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Decrease();
+				Update();
+			}
+		});
+		
+		b3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (square == 4) {
+					square = 0;
+					System.out.println(square);
+				}
+				else {
+					square++ ;
+					System.out.println(square);
+				}
+				Update();
+			}
+		});
+		
+		b4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (vertical) {
+				vertical = false;
+				System.out.println(vertical);
+				}
+				else {
+				vertical = true;
+				System.out.println(vertical);
+				}
 				Update();
 			}
 		});
