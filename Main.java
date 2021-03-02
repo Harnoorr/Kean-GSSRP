@@ -21,6 +21,7 @@ public class Main {
 	JPanel objectPanel = new JPanel();
 	JLabel label0 = new JLabel();
 	JLabel label1 = new JLabel();
+	JLabel label2 = new JLabel();
 	int square = 0;
 	Boolean vertical = true;
 	
@@ -118,12 +119,12 @@ public class Main {
 	    frame.getContentPane().add(label3);
 		*/
 
-		/*
-	    Image img2 = new ImageIcon(this.getClass().getResource("/background.png")).getImage();
+		
+	    Image img2 = new ImageIcon(this.getClass().getResource("/Background.jpg")).getImage();
  		label2.setIcon(new ImageIcon(img2));
 	    label2.setBounds(0, 0, 900, 900); 
 	    frame.getContentPane().add(label2);
-	    */
+	    
 	
 	    
 		updated = true;
