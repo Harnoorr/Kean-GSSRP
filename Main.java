@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Main {
 	
@@ -22,6 +24,8 @@ public class Main {
 	JLabel label0 = new JLabel();
 	JLabel label1 = new JLabel();
 	JLabel label2 = new JLabel();
+	JLabel label3 = new JLabel();
+	
 	int square = 0;
 	Boolean vertical = true;
 	
@@ -73,16 +77,19 @@ public class Main {
 		b4.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		b4.setContentAreaFilled(false);
 		
-		//EXPERIMENTAL CODE FOR SQUARE, FEEL FREE TO IMPROVE
-		if (square == 0) {
-			objectPanel.setBounds(80 + insets.left, 350 + insets.top, 100, 100);
-		    objectPanel.setBackground(Color.YELLOW);	
-		}
-		else {
-			objectPanel.setBounds(80 + insets.left, 350 + insets.top, 100, 200);
-		    objectPanel.setBackground(Color.YELLOW);
-		}
 	}
+	
+/*	public void setCoordinates() {
+		PointerInfo a = MouseInfo.getPointerInfo();
+		Point b = a.getLocation();
+		int xCoord = (int) b.getX();
+		int yCoord = (int) b.getY();
+	}
+	
+	public void mousePressed(MouseEvent e) {
+		System.out.println(e.getClickCount());
+	}
+*/
 	
 	//Updates the current values of the images and adds them to the pane
 	public void Update() {
@@ -111,14 +118,32 @@ public class Main {
 			label1.setBounds(500, 150, 293, 840);
 			frame.getContentPane().add(label1);
 		}
-
-		/*
-		Image img3 = new ImageIcon(this.getClass().getResource("/cube.png")).getImage();
- 		label3.setIcon(new ImageIcon(img3));
-	    label3.setBounds(500, 300, 100, 100);
-	    frame.getContentPane().add(label3);
-		*/
-
+		
+		if (square == 0) {
+			Image img1 = new ImageIcon(this.getClass().getResource("/Cube.png")).getImage();
+			label3.setIcon(new ImageIcon(img1));
+			label3.setBounds(80, 500, 247, 204);
+			frame.getContentPane().add(label3);
+		}
+		else if(square == 1) {
+			Image img1 = new ImageIcon(this.getClass().getResource("/Rectangle.png")).getImage();
+			label3.setIcon(new ImageIcon(img1));
+			label3.setBounds(80, 500, 100, 100);
+			frame.getContentPane().add(label3);
+		}
+		else if(square == 2) {
+			Image img1 = new ImageIcon(this.getClass().getResource("/Cylinder.png")).getImage();
+			label3.setIcon(new ImageIcon(img1));
+			label3.setBounds(80, 500, 100, 100);
+			frame.getContentPane().add(label3);
+		}
+		else {
+			Image img1 = new ImageIcon(this.getClass().getResource("/Sphere.png")).getImage();
+			label3.setIcon(new ImageIcon(img1));
+			label3.setBounds(80, 500, 100, 100);
+			frame.getContentPane().add(label3);
+		}
+		
 		
 	    Image img2 = new ImageIcon(this.getClass().getResource("/Background.jpg")).getImage();
  		label2.setIcon(new ImageIcon(img2));
@@ -162,7 +187,7 @@ public class Main {
 		
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (square == 4) {
+				if (square == 3) {
 					square = 0;
 					System.out.println(square);
 				}
@@ -187,7 +212,40 @@ public class Main {
 				Update();
 			}
 		});
+		
+		label0.addMouseListener(new MouseListener() {
 
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("Clicked");
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 	}
 	
 	//Executes runProgram() method in a separate thread
