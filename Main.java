@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 public class Main {
 	
@@ -28,6 +29,12 @@ public class Main {
 	
 	int square = 0;
 	Boolean vertical = true;
+	
+	int x_pressed = 0;
+	int y_pressed = 0;
+	
+	int shape_X = 80;
+	int shape_Y = 500;
 	
 	//Increases the value of the caliper measure
 	public void Increase() {
@@ -86,9 +93,6 @@ public class Main {
 		int yCoord = (int) b.getY();
 	}
 	
-	public void mousePressed(MouseEvent e) {
-		System.out.println(e.getClickCount());
-	}
 */
 	
 	//Updates the current values of the images and adds them to the pane
@@ -122,25 +126,25 @@ public class Main {
 		if (square == 0) {
 			Image img1 = new ImageIcon(this.getClass().getResource("/Cube.png")).getImage();
 			label3.setIcon(new ImageIcon(img1));
-			label3.setBounds(80, 500, 247, 204);
+			label3.setBounds(shape_X, shape_Y, 247, 204);
 			frame.getContentPane().add(label3);
 		}
 		else if(square == 1) {
 			Image img1 = new ImageIcon(this.getClass().getResource("/Rectangle.png")).getImage();
 			label3.setIcon(new ImageIcon(img1));
-			label3.setBounds(80, 500, 100, 100);
+			label3.setBounds(shape_X, shape_Y, 100, 100);
 			frame.getContentPane().add(label3);
 		}
 		else if(square == 2) {
 			Image img1 = new ImageIcon(this.getClass().getResource("/Cylinder.png")).getImage();
 			label3.setIcon(new ImageIcon(img1));
-			label3.setBounds(80, 500, 100, 100);
+			label3.setBounds(shape_X, shape_Y, 100, 100);
 			frame.getContentPane().add(label3);
 		}
 		else {
 			Image img1 = new ImageIcon(this.getClass().getResource("/Sphere.png")).getImage();
 			label3.setIcon(new ImageIcon(img1));
-			label3.setBounds(80, 500, 100, 100);
+			label3.setBounds(shape_X, shape_Y, 100, 100);
 			frame.getContentPane().add(label3);
 		}
 		
@@ -213,7 +217,7 @@ public class Main {
 			}
 		});
 		
-		label0.addMouseListener(new MouseListener() {
+		label3.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -224,30 +228,55 @@ public class Main {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				System.out.println("Enter");
 			}
 
 			@Override
 			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				System.out.println("Exited");
 			}
 
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
+				System.out.println("Press");
+				
+				x_pressed = arg0.getX();
+				y_pressed = arg0.getY();
 				
 			}
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				System.out.println("Release");
 			}
 			
 		});
+		
+		label3.addMouseMotionListener(new MouseMotionListener() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setLocation((arg0.getXOnScreen() - x_pressed), (arg0.getYOnScreen() - y_pressed));
+			}
+		});
 	}
 	
+	protected void setLocation(int i, int j) {
+		// TODO Auto-generated method stub
+		shape_X = i;
+		shape_Y = j;
+		Update();
+	}
+
 	//Executes runProgram() method in a separate thread
 	public static void main(String[] args) {
 		
